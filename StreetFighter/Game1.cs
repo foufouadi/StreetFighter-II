@@ -8,12 +8,19 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
+    private Background _background;
+    private const int HEIGHT = 224;
+    private const int WIDTH = 384;
+    private const int SCALE = 4;
+    private Camera _camera;
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+        Window.AllowUserResizing = false;
+        _graphics.PreferredBackBufferHeight = HEIGHT * SCALE;
+        _graphics.PreferredBackBufferWidth = WIDTH * SCALE;
     }
 
     protected override void Initialize()
@@ -26,8 +33,9 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        // TODO: use this.Content to load your game content here
+        _background = new Background();
+        _camera  = new Camera();
+        _background.Load(GraphicsDevice);
     }
 
     protected override void Update(GameTime gameTime)
@@ -43,8 +51,9 @@ public class Game1 : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-
-        // TODO: Add your drawing code here
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.NonPremultiplied,transformMatrix:Matrix.CreateScale(SCALE));
+        _background.Draw(_spriteBatch, _camera);
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
