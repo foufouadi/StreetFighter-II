@@ -8,7 +8,9 @@ One arena, two fighters (Ryu and Chun-Li), two players on the same keyboard.
 Student project (university computer science, year 2). Work in progress.
 
 ## Demo
-[Presentation video: Chun-Li idle animation](oral/presentation_chunli_idle.mp4)
+Presentation video (Chun-Li idle animation):
+
+https://github.com/user-attachments/assets/12299ebc-a88b-4872-89fd-3513d6523126
 
 ## Assets
 This is a fan project, not affiliated with Capcom. Street Fighter and its characters, graphics and sounds belong to Capcom.
