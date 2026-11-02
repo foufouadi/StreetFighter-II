@@ -8,11 +8,15 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private Background _background;
+    
     private const int HEIGHT = 224;
     private const int WIDTH = 384;
     private const int SCALE = 4;
+    
     private Camera _camera;
+    private Background _background;
+    private Animation _animation;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -33,18 +37,19 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _background = new Background();
         _camera  = new Camera();
+        _background = new Background();
         _background.Load(GraphicsDevice);
+        _animation = new Animation();
+        _animation.Load(GraphicsDevice);
+
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-        // TODO: Add your update logic here
-
+        _animation.Update(gameTime);
         base.Update(gameTime);
     }
 
@@ -53,6 +58,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.NonPremultiplied,transformMatrix:Matrix.CreateScale(SCALE));
         _background.Draw(_spriteBatch, _camera);
+        _animation.Draw(_spriteBatch, new Vector2(150, 190));
         _spriteBatch.End();
 
         base.Draw(gameTime);
